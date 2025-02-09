@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+	<link rel="stylesheet" href="Golden-buffet.css">
+    <style>
+        body {
+            font-family: Bradley Hand, cursive;
+			background-image: 
+        }
+        .checkout-container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 5px;
+            background-color: gold;
+        }
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .checkout-button {
+            background-color: red;
+            color: black;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        .checkout-button:hover {
+            background-color: gold;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        .payment-form {
+            display: none;
+            margin-top: 20px;
+        }
+        .payment-form input {
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        #payment-success {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .valid {
+            border: 2px solid green;
+        }
+        .invalid {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="GoldenBuffetBanner1.png" alt="Chinese Palace" width="100%">
+        <div class="overlay"></div>
+	</div>
+    <div class="checkout-container">
+        <h2 class="checkout-header">Checkout</h2>
+       
+       <div id="floating-cart-total">
+			<!-- Cart total will be displayed here -->
+		</div>
+		<div id="cart-items">
+			<!-- Cart items will be displayed here -->
+		</div>
+        <!-- Checkout button to reveal payment form -->
+        <button class="checkout-button" id="checkout-btn">Proceed to Checkout</button>
+
+        <!-- Payment Form (hidden initially) -->
+        <div class="payment-form" id="payment-form">
+            <h3>Enter Payment Details</h3>
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9876 5432" required>
+            
+            <label for="expiration-date">Expiration Date (MM/YY)</label>
+            <input type="text" id="expiration-date" placeholder="MM/YY" required>
+            
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="123" required>
+            
+            <label for="postal-code">Postal Code</label>
+            <input type="text" id="postal-code" placeholder="12345" required>
+
+            <button class="checkout-button" id="submit-payment-btn">Submit Payment</button>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="error-message"></div>
+        
+        <!-- Success Message -->
+        <div id="payment-success">
+            <h3>Thank you for your purchase!</h3>
+            <p>Your payment was successful. A confirmation email has been sent.</p>
+            <button onclick="window.location.href='Golden-buffet.html'">Go back to shop</button>
+        </div>
+    </div>
+
+    <script>
+        // Simulate the checkout button action
+        document.getElementById('checkout-btn').addEventListener('click', function() {
+            // Hide the checkout button and show the payment form
+            document.getElementById('checkout-btn').style.display = 'none';
+            document.getElementById('payment-form').style.display = 'block';
+        });
+
+        // Real-time input formatting
+        document.getElementById('card-number').addEventListener('input', function(event) {
+            let value = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+            if (value.length > 4) {
+                value = value.replace(/(\d{4})(?=\d)/g, '$1 '); // Format into groups of 4 digits
+            }
+            event.target.value = value;
+            checkCardNumber();
+        });
+
+        document.getElementById('expiration-date').addEventListener('input', function(event) {
+            let value = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+            if (value.length > 2) {
+                value = value.replace(/(\d{2})(?=\d)/, '$1/'); // Add slash after month
+            }
+            event.target.value = value;
+            checkExpirationDate();
+        });
+
+        document.getElementById('cvv').addEventListener('input', function(event) {
+            let value = event.target.value.replace(/\D/g, ''); // Allow only numbers
+            event.target.value = value.substring(0, 3); // Limit to 3 digits
+            checkCVV();
+        });
+
+        document.getElementById('postal-code').addEventListener('input', function(event) {
+            let value = event.target.value.replace(/\D/g, ''); // Allow only numbers
+            event.target.value = value.substring(0, 5); // Limit to 5 digits
+            checkPostalCode();
+        });
+
+        // Check if card number is valid
+        function checkCardNumber() {
+            const cardNumber = document.getElementById('card-number').value;
+            if (/^\d{4} \d{4} \d{4} \d{4}$/.test(cardNumber)) {
+                document.getElementById('card-number').classList.add('valid');
+                document.getElementById('card-number').classList.remove('invalid');
+            } else {
+                document.getElementById('card-number').classList.add('invalid');
+                document.getElementById('card-number').classList.remove('valid');
+            }
+        }
+
+        // Check if expiration date is valid
+        function checkExpirationDate() {
+            const expirationDate = document.getElementById('expiration-date').value;
+            if (/^(0[1-9]|1[0-2])\/\d{2}$/.test(expirationDate)) {
+                document.getElementById('expiration-date').classList.add('valid');
+                document.getElementById('expiration-date').classList.remove('invalid');
+            } else {
+                document.getElementById('expiration-date').classList.add('invalid');
+                document.getElementById('expiration-date').classList.remove('valid');
+            }
+        }
+
+        // Check if CVV is valid
+        function checkCVV() {
+            const cvv = document.getElementById('cvv').value;
+            if (/^\d{3}$/.test(cvv)) {
+                document.getElementById('cvv').classList.add('valid');
+                document.getElementById('cvv').classList.remove('invalid');
+            } else {
+                document.getElementById('cvv').classList.add('invalid');
+                document.getElementById('cvv').classList.remove('valid');
+            }
+        }
+
+        // Check if postal code is valid
+        function checkPostalCode() {
+            const postalCode = document.getElementById('postal-code').value;
+            if (/^\d{5}$/.test(postalCode)) {
+                document.getElementById('postal-code').classList.add('valid');
+                document.getElementById('postal-code').classList.remove('invalid');
+            } else {
+                document.getElementById('postal-code').classList.add('invalid');
+                document.getElementById('postal-code').classList.remove('valid');
+            }
+        }
+
+        // Simulate the payment submission
+        document.getElementById('submit-payment-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the actual form submission
+
+            // Get form values
+            const cardNumber = document.getElementById('card-number').value.trim();
+            const expirationDate = document.getElementById('expiration-date').value.trim();
+            const cvv = document.getElementById('cvv').value.trim();
+            const postalCode = document.getElementById('postal-code').value.trim();
+
+            // Validate the inputs
+            let errorMessage = '';
+
+            // Check validity of all fields
+            if (!/^\d{4} \d{4} \d{4} \d{4}$/.test(cardNumber)) {
+                errorMessage += 'Card number must be in the format 1234 5678 9876 5432.\n';
+            }
+
+            if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expirationDate)) {
+                errorMessage += 'Expiration date must be in MM/YY format.\n';
+            }
+
+            if (!/^\d{3}$/.test(cvv)) {
+                errorMessage += 'CVV must be 3 digits.\n';
+            }
+
+            if (!/^\d{5}$/.test(postalCode)) {
+                errorMessage += 'Postal code must be 5 digits long.\n';
+            }
+
+            if (errorMessage) {
+                document.getElementById('error-message').textContent = errorMessage;
+                return;  // Stop further execution if there are validation errors
+            }
+
+            // Simulate a successful payment (just for show)
+            simulatePayment();
+        });
+
+        // Simulate the payment success process
+        function simulatePayment() {
+            // Hide payment form and display success message
+            document.getElementById('payment-form').style.display = 'none';
+            document.getElementById('payment-success').style.display = 'block';
+        }
+    </script>
+	<script>
+		// Retrieve cart data from localStorage
+		let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+		let cartTotal = parseFloat(localStorage.getItem('cartTotal')) || 0;
+
+		// Function to update the checkout page with cart data
+		function updateCheckout() {
+			const cartItemsContainer = document.getElementById('cart-items');
+			const cartTotalElement = document.getElementById('floating-cart-total');
+			
+			// Display cart total
+			cartTotalElement.textContent = 'Total: $' + cartTotal.toFixed(2);
+
+			// Display cart items
+			cartItemsContainer.innerHTML = '';  // Clear existing items
+			cartItems.forEach(item => {
+				const cartItemElement = document.createElement('div');
+				cartItemElement.classList.add('cart-item');
+				cartItemElement.innerHTML = `${item.name} - $${item.price.toFixed(2)}`;
+				cartItemsContainer.appendChild(cartItemElement);
+			});
+		}
+
+		// Update checkout page with cart data
+		updateCheckout();
+	</script>
+	
+	<div class="footer">
+	Golden Buffet 2025
+	</div>
+	
+</body>
+</html>
