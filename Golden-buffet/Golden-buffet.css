@@ -11,20 +11,6 @@ body {
   background-repeat: no-repeat;
 }
 
-#checkout-container {
-  background-color: gold;
-  border: 10px solid black;
-  bottom: 20px;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-  color: black;
-  display: none;
-  font-family: Bradley Hand, cursive;
-  padding: 10px;
-  position: fixed;
-  right: 20px;
-  width: 250px;
-}
-
 .container {
   position: relative;
   width: 100%;
@@ -114,6 +100,25 @@ main {
   display: grid;
   gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.buffet-container {
+  align-items: center;
+  background-image: url('Textholder_Topmenu.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-sizing: border-box;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  font-family: Bradley Hand, cursive;
+  height: 200px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
 }
 
 .button-container {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Diet Menu</title>
+    <title>All You Can Eat</title>
     <link rel="stylesheet" href="Golden-buffet.css">
 </head>         
 <body>     
@@ -14,37 +14,45 @@
 		</a>
 		<div class="overlay"></div>
 	</div>
-	<strong>
-	ALL YOU CAN EAT BUFFET(Open now)
-	</strong>
-
-	<div class="allyoucaneat">
-		<p><i><font color="#ff9c00" style="font-weight: bold;">All You Can Eat Buffet&nbsp;</font></i></p>
-		<p><i><font color="#ff9c00" style="font-weight: bold;">(Open everyday except Tuesdays and Thanksgiving)</font></i><br></p>
-		<p><i><font color="#ff9c00" style="font-weight: bold;"><br></font></i></p>
-		<p><b><span style="font-size: 18px;"><u>&nbsp; &nbsp; LUNCH&nbsp; &nbsp;&nbsp;</u></span></b></p>
-		<p><font color="#ce0000">Mon - Sat:&nbsp;</font><font color="#ff0000">1</font><font color="#ce0000">1:00am-&nbsp; 3:30pm</font><b>
-			<span style="font-size: 18px;"><u><br></u></span></b></p>
-		<p><b><span style="font-size: 18px;">ADULT <font color="#ce0000">$12.49</font></span></b></p>
-		<p><b><font color="#295218">CHILDREN&nbsp;</font></b><b><font color="#295218">(3-5) $5.99&nbsp;</font></b><b>
-		<font color="#295218">(6-8) $7.99&nbsp;</font></b><b><font color="#295218">(9-10) $8.99</font>&nbsp;</b>&nbsp;</p>
-		<p><br></p>
-		<p><b><span style="font-size: 18px;"><u>&nbsp; &nbsp; DINNER&nbsp; &nbsp;&nbsp;</u></span></b></p>
-		<p><span style="color: rgb(206, 0, 0);">Mon -&nbsp; Sun:&nbsp;4:00pm - 9:30pm</span><b>
-			<span style="font-size: 18px;"><u><br></u></span></b></p>
-		<p><b><span style="font-size: 18px;">ADULT&nbsp;</span></b><b><span style="font-size: 18px;">
-			<font color="#ce0000">$16.49</font></span></b></p>
-		<p><b><font color="#295218">CHILDREN (3-5)$6.99 &nbsp;(6-8)$8.99 &nbsp;(9-10)$10.99&nbsp;</font>&nbsp;</b>&nbsp;</p>
-		<p><span style="font-size: 18px;"><b><br></b></span></p>
-		<p><span style="font-size: 18px;"><b>SUNDAY&nbsp;<font color="#ce0000">$16.49 all day&nbsp;</font></b></span></p>
-		<p><b><font color="#295218">CHILDREN UNDER 3 FREE &nbsp;</font></b>&nbsp;</p>
-		<p><span style="color: rgb(206, 0, 0);">Senior Citizen Over 60 Get 10% Off</span></p>
-		<p><span style="color: rgb(206, 0, 0);"><br></span></p>
-		<p><span style="font-size: 18px;"><b>CARRY OUT BUFFET</b></span></p>
-		<p><span style="font-size: 18px;"><font color="#295218"><b>LUNCH $5.95 LB</b></font></span></p>
-		<p><span style="font-size: 18px;"><font color="#295218"><b>DINNER $6.95 LB</b></font></span></p>
+	<div id="floating-cart">
+		<div id="floating-cart-total">
+			Total: $0.00
+		</div>
+		<div id="cart-items">
+			<!-- Items added to the cart will show up here -->
+		</div>
+		<button id="clear-cart" class="cart-action">Clear Cart</button>
+		<button id="go-to-checkout" class="cart-action">Go to Checkout</button>
 	</div>
-</div>
+	<div class="buffet-container">
+		<div class="buffet-text">
+			<strong>All You Can Eat Buffet 自助餐</strong><p>Open everyday except Tuesdays and Thanksgiving</p>
+		</div>
+	</div>
+
+	<div class="button-container">
+		<div class="buffet-container">
+			<div class="buffet-text">
+				<strong>LUNCH 午餐</strong><p>Mon - Sat: 11:00am-3:30pm<br>ADULT $12.99, CHILDREN (<12) $7.99</p>
+			</div>
+		</div>
+		<div class="buffet-container">
+			<div class="buffet-text">
+				<strong>DINNER 晚餐</strong><p>Mon - Sun: 4:00pm - 9:30pm<br>ADULT $16.99, CHILDREN (<12) $8.99</p>
+			</div>
+		</div>
+		<div class="buffet-container">
+			<div class="buffet-text">
+				<strong>SUNDAY 星期日</strong><p> $16.49 all day<br>CHILDREN UNDER 3 FREE, Senior Citizen Over 60 Get 10% Off</p>
+			</div>
+		</div>
+		<div class="buffet-container">
+			<div class="buffet-text">
+				<strong>CARRY OUT BUFFET 外卖自助餐</strong><p>LUNCH $5.95 LB<br>DINNER $6.95 LB</p>
+			</div>
+		</div>
+	</div>
+
 
 	<div class="footer">
 	Golden Buffet 2025
