@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Golden-buffet.css">
+    <title>Reservations</title>
+</head>
+<body>
+    <div class="banner"> 
+        <a href="Golden-buffet.html"> 
+            <img src="GoldenBuffetBanner1.png" alt="Banner" width="100%">
+        </a>
+        <div class="overlay"></div>
+    </div>
+	
+	<div id="floating-cart">
+		<div id="floating-cart-total">
+			Total: $0.00
+		</div>
+		<div id="cart-items">
+			<!-- Items added to the cart will show up here -->
+		</div>
+		<button id="clear-cart" class="cart-action">Clear Cart</button>
+		<button id="go-to-checkout" class="cart-action">Go to Checkout</button>
+	</div>
+
+    <div class="reservation">
+        <h2>Reservation</h2>
+        <form id="reservationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <label for="guests">Number of Guests:</label>
+            <input type="number" id="guests" name="guests" min="1" required>
+
+            <button type="submit">Reserve Table</button>
+        </form>
+
+        <!-- Reservation confirmation message -->
+        <p id="confirmation" style="margin-top: 20px;"></p>
+    </div>
+
+    <div class="footer">
+		Golden Buffet 2025
+    </div>
+
+    <script src="Golden-buffet.js"></script>
+</body>
+</html>
+
