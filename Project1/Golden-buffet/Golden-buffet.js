@@ -94,3 +94,70 @@ document.getElementById('go-to-checkout').addEventListener('click', function() {
 // Load the cart data on page load
 updateCartTotal();
 updateCartItems();
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+function formatTime(timeString) {
+    let [hours, minutes] = timeString.split(":");
+    hours = parseInt(hours);
+
+    let period = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
+
+    return `${hours}:${minutes} ${period}`;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const reservationForm = document.getElementById("reservationForm");
+
+    if (reservationForm) {
+        reservationForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let phone = document.getElementById("phone").value;
+            let date = document.getElementById("date").value;
+            let time = document.getElementById("time").value;
+            let guests = document.getElementById("guests").value;
+
+            let formattedDate = formatDate(date);
+            let formattedTime = formatTime(time);
+
+            let reservationData = {
+                name: name,
+                phone: phone,
+                date: date,
+                time: time,
+                guests: guests
+            };
+
+            fetch("http://localhost:3000/api/reservation", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(reservationData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    document.getElementById("confirmation").innerText =
+                `Reservation confirmed for ${name} on ${formattedDate} at ${formattedTime} for ${guests} guests.`;
+                } else {
+                    document.getElementById("confirmation").innerText =
+                    "An error occurred while saving your reservation. Please try again.";
+                }
+                document.getElementById("confirmation").style.visibility = "visible";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("confirmation").innerText =
+                    "An error occurred. Please check your internet connection and try again.";
+                document.getElementById("confirmation").style.visibility = "visible";
+            });
+
+        });
+    }
+});

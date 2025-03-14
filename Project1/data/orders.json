@@ -16,5 +16,78 @@
     "total": 16.9,
     "id": 1,
     "timestamp": "2025-02-12T20:56:41.153Z"
+  },
+  {
+    "name": "Customer Order",
+    "date": "2025-03-14",
+    "time": "ASAP",
+    "quantity": 5,
+    "items": [
+      {
+        "name": "General Tso's Chicken",
+        "price": 8.95
+      },
+      {
+        "name": "Almond Chicken",
+        "price": 8.95
+      },
+      {
+        "name": "Chicken Lo Mein",
+        "price": 6.55
+      },
+      {
+        "name": "Crab Rangoon",
+        "price": 7.95
+      },
+      {
+        "name": "Shrimp Fried Rice",
+        "price": 6.55
+      }
+    ],
+    "total": 38.949999999999996,
+    "id": 2,
+    "timestamp": "2025-03-14T20:20:48.246Z"
+  },
+  {
+    "name": "Customer Order",
+    "date": "2025-03-14",
+    "time": "ASAP",
+    "quantity": 2,
+    "items": [
+      {
+        "name": "Wonton Soup",
+        "price": 3.95
+      },
+      {
+        "name": "Sweet & Sour Chicken",
+        "price": 6.95
+      }
+    ],
+    "total": 10.9,
+    "id": 3,
+    "timestamp": "2025-03-14T20:25:29.291Z"
+  },
+  {
+    "name": "Customer Order",
+    "date": "2025-03-14",
+    "time": "ASAP",
+    "quantity": 3,
+    "items": [
+      {
+        "name": "Fried or Boiled Dumplings",
+        "price": 7.95
+      },
+      {
+        "name": "Sweet & Sour Chicken",
+        "price": 6.95
+      },
+      {
+        "name": "Wonton Soup",
+        "price": 3.95
+      }
+    ],
+    "total": 18.85,
+    "id": 4,
+    "timestamp": "2025-03-14T20:32:17.532Z"
   }
 ]

@@ -11,22 +11,27 @@ body {
   background-repeat: no-repeat;
 }
 
+#confirmation {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
 .container {
   position: relative;
   width: 100%;
 }
 
 .footer {
-	text-align: center;
-	color: gold;
-}
-
-footer {
-  background: #8b0000;
-  color: #fff;
-  margin-top: 2em;
-  padding: 1em 0;
-  text-align: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1em 0;
+    text-align: center;
+    color: gold;
 }
 
 header {
@@ -54,6 +59,10 @@ header nav ul li a {
 .info {
 	font-family: Bradley Hand, cursive;
 	font-size: 1.3em;
+}
+
+main-content {
+	flex: 1;
 }
 
 main {
@@ -100,6 +109,27 @@ main {
   display: grid;
   gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.reservation {
+  align-items: center;
+  background-image: url('Textholder_Topmenu.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-sizing: border-box;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  font-family: Bradley Hand, cursive;
+  height: 275px;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  overflow: hidden;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
 }
 .buffet-container {
   align-items: center;

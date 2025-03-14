@@ -105,50 +105,47 @@
         <!-- Success Message -->
         <div id="payment-success">
             <h3>Thank you for your purchase!</h3>
-            <p>Your payment was successful. A confirmation email has been sent.</p>
+            <p>Your payment was successful.</p>
             <button onclick="window.location.href='Golden-buffet.html'">Go back to shop</button>
         </div>
     </div>
 
     <script>
+        // Simulate the checkout button action
         document.getElementById('checkout-btn').addEventListener('click', function() {
+            // Hide the checkout button and show the payment form
             document.getElementById('checkout-btn').style.display = 'none';
             document.getElementById('payment-form').style.display = 'block';
-
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            let cartTotal = parseFloat(localStorage.getItem('cartTotal')) || 0;
-
-            document.getElementById('floating-cart-total').textContent = `Total: $${cartTotal.toFixed(2)}`;
-        }); //end checkout button
+        });
 
         // Real-time input formatting
         document.getElementById('card-number').addEventListener('input', function(event) {
-            let value = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+            let value = event.target.value.replace(/\D/g, '');
             if (value.length > 4) {
-                value = value.replace(/(\d{4})(?=\d)/g, '$1 '); // Format into groups of 4 digits
+                value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
             }
             event.target.value = value;
             checkCardNumber();
         });
 
         document.getElementById('expiration-date').addEventListener('input', function(event) {
-            let value = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+            let value = event.target.value.replace(/\D/g, '');
             if (value.length > 2) {
-                value = value.replace(/(\d{2})(?=\d)/, '$1/'); // Add slash after month
+                value = value.replace(/(\d{2})(?=\d)/, '$1/');
             }
             event.target.value = value;
             checkExpirationDate();
         });
 
         document.getElementById('cvv').addEventListener('input', function(event) {
-            let value = event.target.value.replace(/\D/g, ''); // Allow only numbers
-            event.target.value = value.substring(0, 3); // Limit to 3 digits
+            let value = event.target.value.replace(/\D/g, '');
+            event.target.value = value.substring(0, 3);
             checkCVV();
         });
 
         document.getElementById('postal-code').addEventListener('input', function(event) {
-            let value = event.target.value.replace(/\D/g, ''); // Allow only numbers
-            event.target.value = value.substring(0, 5); // Limit to 5 digits
+            let value = event.target.value.replace(/\D/g, '');
+            event.target.value = value.substring(0, 5);
             checkPostalCode();
         });
 
@@ -200,76 +197,88 @@
             }
         }
 
-        // Simulate the payment submission
-        document.getElementById('submit-payment-btn').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the actual form submission
+        document.getElementById('submit-payment-btn').addEventListener('click', async function(event) {
+    event.preventDefault();
 
-            // Get form values
-            const cardNumber = document.getElementById('card-number').value.trim();
-            const expirationDate = document.getElementById('expiration-date').value.trim();
-            const cvv = document.getElementById('cvv').value.trim();
-            const postalCode = document.getElementById('postal-code').value.trim();
+    const submitButton = document.getElementById('submit-payment-btn');
+    submitButton.disabled = true;
 
-            // Validate the inputs
-            let errorMessage = '';
+    const cardNumber = document.getElementById('card-number').value.trim();
+    const expirationDate = document.getElementById('expiration-date').value.trim();
+    const cvv = document.getElementById('cvv').value.trim();
+    const postalCode = document.getElementById('postal-code').value.trim();
 
-            // Check validity of all fields
-            if (!/^\d{4} \d{4} \d{4} \d{4}$/.test(cardNumber)) {
-                errorMessage += 'Card number must be in the format 1234 5678 9876 5432.\n';
-            }
+    let errorMessage = '';
 
-            if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expirationDate)) {
-                errorMessage += 'Expiration date must be in MM/YY format.\n';
-            }
+    if (!/^\d{4} \d{4} \d{4} \d{4}$/.test(cardNumber)) {
+        errorMessage += 'Card number must be in the format 1234 5678 9876 5432.\n';
+    }
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expirationDate)) {
+        errorMessage += 'Expiration date must be in MM/YY format.\n';
+    }
+    if (!/^\d{3}$/.test(cvv)) {
+        errorMessage += 'CVV must be 3 digits.\n';
+    }
+    if (!/^\d{5}$/.test(postalCode)) {
+        errorMessage += 'Postal code must be 5 digits long.\n';
+    }
 
-            if (!/^\d{3}$/.test(cvv)) {
-                errorMessage += 'CVV must be 3 digits.\n';
-            }
+    if (errorMessage) {
+        document.getElementById('error-message').textContent = errorMessage;
+        submitButton.disabled = false;
+        return;
+    }
 
-            if (!/^\d{5}$/.test(postalCode)) {
-                errorMessage += 'Postal code must be 5 digits long.\n';
-            }
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    let cartTotal = parseFloat(localStorage.getItem('cartTotal')) || 0;
 
-            if (errorMessage) {
-                document.getElementById('error-message').textContent = errorMessage;
-                return;  // Stop further execution if there are validation errors
-            }
+    if (cartItems.length === 0) {
+        alert("Your cart is empty. Add items before checking out.");
+        submitButton.disabled = false;
+        return;
+    }
 
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            let cartTotal = parseFloat(localStorage.getItem('cartTotal')) || 0;
+    const orderData = {
+        name: "Customer Order",
+        date: new Date().toISOString().split('T')[0],
+        time: "ASAP",
+        quantity: cartItems.length,
+        items: cartItems,
+        total: cartTotal
+    };
 
-            if (cartItems.length === 0) {
-                alert("The cart is empty, please add items to check out.");
-                return;
-            }
-
-            const orderData = {
-                name: "Customer Order",
-                date: new Date().toISOString().split('T')[0],
-                time: "ASAP",
-                items: cartItems,
-                total: cartTotal
-            };
-
-            fetch('http://localhost:3000/api/order', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Order placed successfully! Thank you for your purchase.");
-
-                localStorage.removeItem('cartItems');
-                localStorage.removeItem('cartTotal');
-
-                window.location.href = 'Golden-buffet.html';
-            })
-            .catch(error => console.error("Error placing order:", error));
-            
+    try {
+        const response = await fetch('http://localhost:3000/api/order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderData)
         });
-    </script>
 
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        alert("Order placed successfully! Thank you for your purchase.");
+
+        localStorage.removeItem('cartItems');
+        localStorage.removeItem('cartTotal');
+
+        window.location.href = 'Golden-buffet.html';
+    } catch (error) {
+        console.error("Error placing order:", error);
+        alert("An error occurred while placing your order. Please try again.");
+        submitButton.disabled = false;
+    }
+});
+
+        // Simulate the payment success process
+        function simulatePayment() {
+            // Hide payment form and display success message
+            document.getElementById('payment-form').style.display = 'none';
+            document.getElementById('payment-success').style.display = 'block';
+        }
+    </script>
 	<script>
 		// Retrieve cart data from localStorage
 		let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -284,7 +293,7 @@
 			cartTotalElement.textContent = 'Total: $' + cartTotal.toFixed(2);
 
 			// Display cart items
-			cartItemsContainer.innerHTML = '';  // Clear existing items
+			cartItemsContainer.innerHTML = '';
 			cartItems.forEach(item => {
 				const cartItemElement = document.createElement('div');
 				cartItemElement.classList.add('cart-item');
@@ -293,7 +302,6 @@
 			});
 		}
 
-		// Update checkout page with cart data
 		updateCheckout();
 	</script>
 	
