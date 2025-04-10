@@ -81,7 +81,6 @@
         <!-- Checkout button to reveal payment form -->
         <button class="checkout-button" id="checkout-btn">Proceed to Checkout</button>
 
-        <!-- Payment Form (hidden initially) -->
         <div class="payment-form" id="payment-form">
             <h3>Enter Payment Details</h3>
             <label for="card-number">Card Number</label>
@@ -99,10 +98,8 @@
             <button class="checkout-button" id="submit-payment-btn">Submit Payment</button>
         </div>
 
-        <!-- Error Message -->
         <div id="error-message" class="error-message"></div>
         
-        <!-- Success Message -->
         <div id="payment-success">
             <h3>Thank you for your purchase!</h3>
             <p>Your payment was successful.</p>
@@ -111,9 +108,8 @@
     </div>
 
     <script>
-        // Simulate the checkout button action
+
         document.getElementById('checkout-btn').addEventListener('click', function() {
-            // Hide the checkout button and show the payment form
             document.getElementById('checkout-btn').style.display = 'none';
             document.getElementById('payment-form').style.display = 'block';
         });
@@ -274,7 +270,6 @@
 
         // Simulate the payment success process
         function simulatePayment() {
-            // Hide payment form and display success message
             document.getElementById('payment-form').style.display = 'none';
             document.getElementById('payment-success').style.display = 'block';
         }

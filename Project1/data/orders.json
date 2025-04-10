@@ -89,5 +89,73 @@
     "total": 18.85,
     "id": 4,
     "timestamp": "2025-03-14T20:32:17.532Z"
+  },
+  {
+    "name": "Customer Order",
+    "date": "2025-04-02",
+    "time": "ASAP",
+    "quantity": 2,
+    "items": [
+      {
+        "name": "General Tso's Chicken",
+        "price": 8.95
+      },
+      {
+        "name": "Crab Rangoon",
+        "price": 7.95
+      }
+    ],
+    "total": 16.9,
+    "id": 5,
+    "timestamp": "2025-04-02T23:38:46.581Z"
+  },
+  {
+    "name": "Customer Order",
+    "date": "2025-04-10",
+    "time": "ASAP",
+    "quantity": 1,
+    "items": [
+      {
+        "name": "Chicken Fried Rice",
+        "price": 5.95
+      }
+    ],
+    "total": 5.950000000000001,
+    "id": 6,
+    "timestamp": "2025-04-10T15:49:23.101Z"
+  },
+  {
+    "name": "Customer Order",
+    "date": "2025-04-10",
+    "time": "ASAP",
+    "quantity": 1,
+    "items": [
+      {
+        "name": "Almond Chicken",
+        "price": 8.95
+      }
+    ],
+    "total": 8.95,
+    "id": 7,
+    "timestamp": "2025-04-10T15:50:13.557Z"
+  },
+  {
+    "name": "Customer Order",
+    "date": "2025-04-10",
+    "time": "ASAP",
+    "quantity": 2,
+    "items": [
+      {
+        "name": "Crab Rangoon",
+        "price": 7.95
+      },
+      {
+        "name": "Kung Pao Chicken With Peanuts",
+        "price": 8.95
+      }
+    ],
+    "total": 16.9,
+    "id": 8,
+    "timestamp": "2025-04-10T16:00:52.782Z"
   }
 ]

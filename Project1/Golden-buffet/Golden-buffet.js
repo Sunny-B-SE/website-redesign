@@ -1,5 +1,5 @@
 let cartTotal = parseFloat(localStorage.getItem('cartTotal')) || 0;
-let cartItems = JSON.parse(localStorage.getItem('cartItems')) || []; // Retrieve saved cart items
+let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
 // Function to save cart data to localStorage
 function saveCartData() {
@@ -36,10 +36,10 @@ function updateCartItems() {
     }
 }
 
-// Event listener for all add-to-cart links (instead of buttons)
+// Event listener for all add-to-cart links
 document.querySelectorAll('.add-to-cart').forEach(link => {
     link.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent the default action of the anchor tag (navigation)
+        e.preventDefault();
 
         const name = this.getAttribute('data-name');
         const price = parseFloat(this.getAttribute('data-price'));
@@ -47,7 +47,7 @@ document.querySelectorAll('.add-to-cart').forEach(link => {
         // Add item to cart
         cartItems.push({ name, price });
         
-        // Update the total price
+        // Update total price
         cartTotal += price;
 
         // Update the floating cart display
@@ -56,7 +56,7 @@ document.querySelectorAll('.add-to-cart').forEach(link => {
     });
 });
 
-// Event listener for removing an item from the cart (in the floating cart)
+// Event listener for removing an item from the cart
 document.getElementById('cart-items').addEventListener('click', function(e) {
     if (e.target && e.target.classList.contains('remove-item')) {
         const itemIndex = e.target.getAttribute('data-index');
@@ -68,7 +68,6 @@ document.getElementById('cart-items').addEventListener('click', function(e) {
         // Subtract the price of the removed item from the total
         cartTotal -= removedItem.price;
 
-        // Update the floating cart display
         updateCartTotal();
         updateCartItems();
     }
@@ -76,22 +75,18 @@ document.getElementById('cart-items').addEventListener('click', function(e) {
 
 // Event listener for clearing the cart
 document.getElementById('clear-cart').addEventListener('click', function() {
-    // Clear all items and reset total
     cartItems = [];
     cartTotal = 0;
 
-    // Update the floating cart display
     updateCartTotal();
     updateCartItems();
 });
 
 // Event listener for going to checkout
 document.getElementById('go-to-checkout').addEventListener('click', function() {
-    // Redirect to the checkout page
     window.location.href = 'Golden-buffet-checkout.html';
 });
 
-// Load the cart data on page load
 updateCartTotal();
 updateCartItems();
 
@@ -99,7 +94,7 @@ function formatDate(dateString) {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
-}
+} //end formatData
 
 function formatTime(timeString) {
     let [hours, minutes] = timeString.split(":");
@@ -109,7 +104,7 @@ function formatTime(timeString) {
     hours = hours % 12 || 12;
 
     return `${hours}:${minutes} ${period}`;
-}
+} //end formatTime
 
 document.addEventListener("DOMContentLoaded", function () {
     const reservationForm = document.getElementById("reservationForm");
@@ -139,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(reservationData)
-            })
+            }) //end fetch
             .then(response => response.json())
             .then(data => {
                 if (data.message) {
@@ -150,14 +145,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     "An error occurred while saving your reservation. Please try again.";
                 }
                 document.getElementById("confirmation").style.visibility = "visible";
-            })
+            }) //end then data
             .catch(error => {
                 console.error("Error:", error);
                 document.getElementById("confirmation").innerText =
                     "An error occurred. Please check your internet connection and try again.";
                 document.getElementById("confirmation").style.visibility = "visible";
-            });
+            }); //end catch error
 
-        });
-    }
-});
+        }); //end reservationForm eventListener
+    } //end if
+}); //end document eventListener
