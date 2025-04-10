@@ -157,5 +157,24 @@
     "total": 16.9,
     "id": 8,
     "timestamp": "2025-04-10T16:00:52.782Z"
+  },
+  {
+    "name": "Customer Order",
+    "date": "2025-04-10",
+    "time": "ASAP",
+    "quantity": 2,
+    "items": [
+      {
+        "name": "Green Pepper Steak With Onion",
+        "price": 11.95
+      },
+      {
+        "name": "HAPPY FAMILY",
+        "price": 15.95
+      }
+    ],
+    "total": 27.9,
+    "id": 9,
+    "timestamp": "2025-04-10T16:40:50.209Z"
   }
 ]
